@@ -31,6 +31,7 @@ class AppointmentsController < ApplicationController
   # POST /appointments.json
   def create
     @appointment = Appointment.new(appointment_params)
+    @appointment.patient_id = current_user.id
     @appointment.state = "0-solicitada" if current_user.type == 'Patient'  
 
     respond_to do |format|

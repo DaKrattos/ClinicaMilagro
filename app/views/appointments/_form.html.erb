@@ -13,12 +13,9 @@
 
   <div class="field">
     <%= f.label :doctor_id %><br>
-    <%= f.number_field :doctor_id %>
+    <%= f.select :doctor_id, Doctor.order('name asc').map {|d| [d.name + ' ' +d.lastname, d.id]} %>
   </div>
-  <div class="field">
-    <%= f.label :patient_id %><br>
-    <%= f.number_field :patient_id %>
-  </div>
+  
   <div class="field">
     <%= f.label :description %><br>
     <%= f.text_field :description %>
@@ -26,11 +23,11 @@
   
   <div class="field">
     <%= f.label :date %><br>
-    <%= f.text_field :date %>
+    <%= f.date_field :date %>
   </div>
   <div class="field">
     <%= f.label :hour %><br>
-    <%= f.text_field :hour %>
+    <%= f.time_field :hour %>
   </div>
   <div class="actions">
     <%= f.submit %>
