@@ -3,12 +3,7 @@ require 'test_helper'
 class AppointmentsControllerTest < ActionController::TestCase
   setup do
     @appointment = appointments(:one)
-  end
-
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:appointments)
+    sign_in users(:two)
   end
 
   test "should get new" do
@@ -37,13 +32,5 @@ class AppointmentsControllerTest < ActionController::TestCase
   test "should update appointment" do
     patch :update, id: @appointment, appointment: { date: @appointment.date, description: @appointment.description, doctor_id: @appointment.doctor_id, hour: @appointment.hour, patient_id: @appointment.patient_id, state: @appointment.state }
     assert_redirected_to appointment_path(assigns(:appointment))
-  end
-
-  test "should destroy appointment" do
-    assert_difference('Appointment.count', -1) do
-      delete :destroy, id: @appointment
-    end
-
-    assert_redirected_to appointments_path
   end
 end

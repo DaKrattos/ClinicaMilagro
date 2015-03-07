@@ -23,12 +23,12 @@
   
   <div class="field">
     <%= f.label :date %><br>
-    <%= f.date_field :date %>
+    <%= f.date_field :date, value: @appointment.date %>
   </div>
   
   <div class="field">
     <%= f.label :hour %><br>
-    <%= f.time_field :hour %>
+    <%= f.time_field :hour, value: @appointment.hour %>
   </div>
   
   <div class="actions">

@@ -5,7 +5,8 @@ class AppointmentsController < ApplicationController
   # GET /appointments
   # GET /appointments.json
   def index
-    @appointments = Appointment.all
+    @appointments = Doctor.find(current_user.id).appointments if current_user.type == 'Doctor'
+    @appointments ||= Patient.find(current_user.id).appointments
   end
 
   # GET /appointments/1

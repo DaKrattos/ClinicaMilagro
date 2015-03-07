@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  identi: MyString
+  identi: 12345
   name: MyString
   lastname: MyString
-  email: MyString
-  type: 
+  email: doctor@email.com
+  type: Doctor
 
 two:
-  identi: MyString
+  identi: 67890
   name: MyString
   lastname: MyString
-  email: MyString
-  type: 
+  email: patient@email.com
+  type: Patient

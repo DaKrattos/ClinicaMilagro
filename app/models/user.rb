@@ -3,5 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-    has_many :appointments
+  validates :name,     presence: true
+  validates :identi,   presence: true, length: {minimum: 6}, numericality: { only_integer: true }
+  validates :lastname, presence: true
 end
