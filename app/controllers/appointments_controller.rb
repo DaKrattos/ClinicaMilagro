@@ -1,5 +1,5 @@
 class AppointmentsController < ApplicationController
-  before_action :set_appointment, only: [:show, :edit, :update, :destroy]
+  before_action :set_appointment, only: [:show, :edit, :update, :destroy, :accept, :reject]
   before_action :authenticate_user!
 
   # GET /appointments
@@ -15,7 +15,12 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments/new
   def new
-    @appointment = Appointment.new
+    if current_user.type == 'Doctor'
+      flash[:error] = 'Un usuario con rol medico no puede crear citas'
+      redirect_to root_path
+    else
+      @appointment = Appointment.new
+    end
   end
 
   # GET /appointments/1/edit
@@ -26,6 +31,7 @@ class AppointmentsController < ApplicationController
   # POST /appointments.json
   def create
     @appointment = Appointment.new(appointment_params)
+    @appointment.state = "0-solicitada" if current_user.type == 'Patient'  
 
     respond_to do |format|
       if @appointment.save
@@ -51,13 +57,23 @@ class AppointmentsController < ApplicationController
       end
     end
   end
+  
+  def accept
+    @appointment.update(state: '1-aceptada')
+    redirect_to root_path
+  end
+  
+  def reject
+    @appointment.update(state: '2-rechazada')
+    redirect_to root_path
+  end
 
   # DELETE /appointments/1
   # DELETE /appointments/1.json
   def destroy
-    @appointment.destroy
+    @appointment.update(state: '3-cancelada')
     respond_to do |format|
-      format.html { redirect_to appointments_url, notice: 'Appointment was successfully destroyed.' }
+      format.html { redirect_to appointments_url, notice: 'Appointment was successfully cancelled.' }
       format.json { head :no_content }
     end
   end
