@@ -1,14 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Doctor:</strong>
-  <%= @appointment.doctor_id %>
-</p>
 
-<p>
-  <strong>Patient:</strong>
-  <%= @appointment.patient_id %>
-</p>
+<% if current_user.type == 'Patient' %>
+  <p>
+    <strong>Doctor:</strong>
+    <%= @appointment.doctor.name + ' ' + @appointment.doctor.lastname %>
+  </p>
+  
+<% else %>
+
+  <p>
+    <strong>Patient:</strong>
+    <%= @appointment.patient.name + ' ' + @appointment.doctor.lastname %>
+  </p>
+<% end %>
 
 <p>
   <strong>Description:</strong>
