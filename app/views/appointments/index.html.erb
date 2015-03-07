@@ -28,13 +28,13 @@
         <td><%= appointment.state %></td>
         <td><%= appointment.date %></td>
         <td><%= appointment.hour %></td>
-        <td><%= link_to 'Show', appointment %></td>
+        <td><%= link_to 'Show', appointment, :class => 'button info'  %></td>
         <% if current_user.type == 'Patient' %>
-          <td><%= link_to 'Edit', edit_appointment_path(appointment) %></td>
-          <td><%= link_to 'Cancel', appointment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Edit', edit_appointment_path(appointment), :class => 'button'  %></td>
+          <td><%= link_to 'Cancel', appointment, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'button alert'  %></td>
         <% else %>
-          <td><%= link_to 'Accept', accept_path(appointment), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <td><%= link_to 'Reject', reject_path(appointment), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Accept', accept_path(appointment), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'button success'  %></td>
+          <td><%= link_to 'Reject', reject_path(appointment), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'button alert'  %></td>
         <% end %>
       </tr>
     <% end %>
