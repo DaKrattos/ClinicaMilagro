@@ -16,32 +16,30 @@
       <ul class="title-area">
         <li class="name">
           <h1>
-            <%= link_to 'Clinica Milagro', root_path %>
+            <%= link_to image_tag("http://www.crossbaymedical.com/images/088954-3d-glossy-blue-orb-icon-signs-medical-alert.png", :width => "35px")+"Clinica Milagro", root_path %>
           </h1>
         </li>
          <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
         <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
       </ul>
-    
       <section class="top-bar-section">
         
         <ul class="right">
-          <% if user_signed_in? %>
-            <li class="active">
-              <%= link_to 'Edit', edit_user_registration_path %>
-            </li>
-            <li>
-              
-            </li>
-          <% else %>
-            <li class="active">
-              
-            </li>
-            <li>
-              
-            </li>
-          <% end %>
-        </ul>
+           <% if user_signed_in? %>
+             <li class="active">
+               <%= link_to current_user.name.upcase, edit_user_registration_path %>            </li>
+             <li>
+               <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+             </li>
+           <% else %>
+             <li class="active">
+               <%= link_to 'Sign Up', new_user_registration_path %>
+             </li>
+             <li>
+               <%= link_to 'Sign In', user_session_path %>
+             </li>
+           <% end %>
+         </ul>
         
       </section>
     </nav>
